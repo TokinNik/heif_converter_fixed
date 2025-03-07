@@ -69,9 +69,9 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
     File file = new File(output);
     file.createNewFile();
     Bitmap.CompressFormat format = getFormat(output);
-    int q = 100
+    int q = 100;
     if(quality != null){
-        q = quality
+        q = quality;
     }
     bitmap.compress(format, q, new FileOutputStream(file));
     return file.getPath();
