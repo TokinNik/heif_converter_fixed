@@ -10,15 +10,21 @@ class MethodChannelHeifConverter extends HeifConverterPlatform {
   final methodChannel = const MethodChannel('heif_converter');
 
   @override
-  Future<String?> convert(String path, {
+  Future<String?> convert(
+    String path, {
     String? output,
     String? format,
+    int? quality,
   }) async {
     if (output == null && format == null) {
-      throw ArgumentError('Please provide output path or format for conversion.','output');
+      throw ArgumentError('Please provide output path or format for conversion.', 'output');
     }
-    final result = await methodChannel
-        .invokeMethod<String>('convert', {'path': path, 'output': output, 'format': format});
+    final result = await methodChannel.invokeMethod<String>('convert', {
+      'path': path,
+      'output': output,
+      'format': format,
+      'quality': quality,
+    });
     return result;
   }
 }

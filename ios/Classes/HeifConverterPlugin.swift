@@ -21,6 +21,10 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
       if(!(input["format"] is NSNull)){
         format = input["format"] as! String?
       }
+      var quality: Integer?
+      if(!(input["quality"] is NSNull)){
+        quality = input["quality"] as! Integer?
+      }
       if(output == nil || output!.isEmpty){
         if(format != nil && !format!.isEmpty){
           output = NSTemporaryDirectory().appendingFormat("%d.%s", Date().timeIntervalSince1970 * 1000, format!)
@@ -35,14 +39,14 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  func convert(path: String, output: String) -> String? {
+  func convert(path: String, output: String, quality: Integer) -> String? {
       let image: UIImage? = UIImage(named: path)
       if image == nil {
         return nil
       }
       var imageData: Data?
       if (output.hasSuffix(".jpg") || output.hasSuffix(".jpeg")) {
-        imageData = image!.jpegData(compressionQuality: 1.0)
+        imageData = image!.jpegData(compressionQuality: quality / 100)
       } else {
         imageData = image!.pngData()
       }

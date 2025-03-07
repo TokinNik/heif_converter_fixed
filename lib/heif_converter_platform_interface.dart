@@ -26,6 +26,7 @@ abstract class HeifConverterPlatform extends PlatformInterface {
   Future<String?> convert(String path, {
     String? output,
     String? format,
+    int? quality,
   }) {
     throw UnimplementedError('convert(String path, String output) has not been implemented.');
   }

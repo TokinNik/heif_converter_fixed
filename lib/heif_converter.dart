@@ -5,7 +5,13 @@ class HeifConverter {
     String path, {
     String? output,
     String? format,
+    int? quality,
   }) {
-    return HeifConverterPlatform.instance.convert(path, output: output, format: format);
+    return HeifConverterPlatform.instance.convert(
+      path,
+      output: output,
+      format: format,
+      quality: quality,
+    );
   }
 }

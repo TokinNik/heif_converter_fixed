@@ -39,6 +39,7 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
       String path = call.hasArgument("path") ? call.argument("path") : null;
       String output = call.hasArgument("output") ? call.argument("output") : null;
       String format = call.hasArgument("format") ? call.argument("format") : null;
+      String quality = call.hasArgument("quality") ? call.argument("quality") : null;
       if (path == null || path.isEmpty()) {
         result.error("illegalArgument", "Input path is blank.", null);
         return;
@@ -53,7 +54,7 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
         }
       }
       try {
-        output = convert(path, output);
+        output = convert(path, output, quality);
         result.success(output);
       } catch (Exception e) {
         result.error("conversionFailed", e.getMessage(), e);
@@ -63,12 +64,16 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
     }
   }
 
-  private String convert(String path, String output) throws IOException {
+  private String convert(String path, String output, int quality) throws IOException {
     Bitmap bitmap = BitmapFactory.decodeFile(path);
     File file = new File(output);
     file.createNewFile();
     Bitmap.CompressFormat format = getFormat(output);
-    bitmap.compress(format, 100, new FileOutputStream(file));
+    int q = 100
+    if(quality != null){
+        q = quality
+    }
+    bitmap.compress(format, q, new FileOutputStream(file));
     return file.getPath();
   }
 
