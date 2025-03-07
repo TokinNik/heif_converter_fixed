@@ -33,20 +33,20 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
           break
         }
       }
-      result(convert(path: path, output: output!, quality: Int(quality)))
+      result(convert(path: path, output: output!, quality: Double(quality) ?? 100.0))
     default:
       result(FlutterMethodNotImplemented)
     }
   }
 
-  func convert(path: String, output: String, quality: Int) -> String? {
+  func convert(path: String, output: String, quality: Double) -> String? {
       let image: UIImage? = UIImage(named: path)
       if image == nil {
         return nil
       }
       var imageData: Data?
       if (output.hasSuffix(".jpg") || output.hasSuffix(".jpeg")) {
-        imageData = image!.jpegData(compressionQuality: Double(quality)  / 100.0)
+        imageData = image!.jpegData(compressionQuality: quality / 100.0)
       } else {
         imageData = image!.pngData()
       }
