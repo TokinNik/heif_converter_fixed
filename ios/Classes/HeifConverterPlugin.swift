@@ -39,7 +39,7 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
     }
   }
 
-  func convert(path: String, output: String, quality: int) -> String? {
+  func convert(path: String, output: String, quality: Int) -> String? {
       let image: UIImage? = UIImage(named: path)
       if image == nil {
         return nil
