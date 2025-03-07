@@ -23,7 +23,7 @@ class MethodChannelHeifConverter extends HeifConverterPlatform {
       'path': path,
       'output': output,
       'format': format,
-      'quality': quality ?? 100,
+      'quality': (quality ?? 100).toString(),
     });
     return result;
   }
