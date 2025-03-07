@@ -54,7 +54,7 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
         }
       }
       try {
-        output = convert(path, output, quality);
+        output = convert(path, output, Integer.parseInt(quality));
         result.success(output);
       } catch (Exception e) {
         result.error("conversionFailed", e.getMessage(), e);
@@ -69,11 +69,7 @@ public class HeifConverterPlugin implements FlutterPlugin, MethodCallHandler {
     File file = new File(output);
     file.createNewFile();
     Bitmap.CompressFormat format = getFormat(output);
-    int q = 100
-    if(quality != null){
-        q = quality
-    }
-    bitmap.compress(format, q, new FileOutputStream(file));
+    bitmap.compress(format, quality, new FileOutputStream(file));
     return file.getPath();
   }
 

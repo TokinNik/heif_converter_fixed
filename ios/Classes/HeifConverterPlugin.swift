@@ -21,9 +21,9 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
       if(!(input["format"] is NSNull)){
         format = input["format"] as! String?
       }
-      var quality: Integer?
+      var quality: String?
       if(!(input["quality"] is NSNull)){
-        quality = input["quality"] as! Integer?
+        quality = input["quality"] as! String?
       }
       if(output == nil || output!.isEmpty){
         if(format != nil && !format!.isEmpty){
@@ -33,13 +33,13 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
           break
         }
       }
-      result(convert(path: path, output: output!))
+      result(convert(path: path, output: output!, quality: Int(quality)))
     default:
       result(FlutterMethodNotImplemented)
     }
   }
 
-  func convert(path: String, output: String, quality: Integer) -> String? {
+  func convert(path: String, output: String, quality: int) -> String? {
       let image: UIImage? = UIImage(named: path)
       if image == nil {
         return nil
