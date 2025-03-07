@@ -46,7 +46,7 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
       }
       var imageData: Data?
       if (output.hasSuffix(".jpg") || output.hasSuffix(".jpeg")) {
-        imageData = image!.jpegData(compressionQuality: quality / 100)
+        imageData = image!.jpegData(compressionQuality: quality / 100.0)
       } else {
         imageData = image!.pngData()
       }
