@@ -33,7 +33,7 @@ public class HeifConverterPlugin: NSObject, FlutterPlugin {
           break
         }
       }
-      result(convert(path: path, output: output!, quality: Double(quality) ?? 100.0))
+       result(convert(path: path, output: output!, quality: Double(quality ?? "100") ?? 100.0))
     default:
       result(FlutterMethodNotImplemented)
     }
